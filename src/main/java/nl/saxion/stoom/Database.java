@@ -12,7 +12,7 @@ public class Database {
     public Database() {
         games = new ArrayList<>();
 
-        populateGames(10);
+        populateGames(100);
     }
 
     /**
@@ -22,7 +22,37 @@ public class Database {
      */
     private void populateGames(int amount) {
         for (int i = 0; i < amount; i++) {
-            this.games.add(new Game("Game " + (i + 1), "Action", "A game to test."));
+            int rand = (int) (Math.random() * 9) + 1;
+
+            switch (rand) {
+                case 1:
+                    this.games.add(new Game("Game " + (i + 1), "Action", "A game to test."));
+                    break;
+                case 2:
+                    this.games.add(new Game("Game " + (i + 1), "Adventure", "A game to test."));
+                    break;
+                case 3:
+                    this.games.add(new Game("Game " + (i + 1), "Casual", "A game to test."));
+                    break;
+                case 4:
+                    this.games.add(new Game("Game " + (i + 1), "Indie", "A game to test."));
+                    break;
+                case 5:
+                    this.games.add(new Game("Game " + (i + 1), "Racing", "A game to test."));
+                    break;
+                case 6:
+                    this.games.add(new Game("Game " + (i + 1), "Roleplaying", "A game to test."));
+                    break;
+                case 7:
+                    this.games.add(new Game("Game " + (i + 1), "Simulation", "A game to test."));
+                    break;
+                case 8:
+                    this.games.add(new Game("Game " + (i + 1), "Sports", "A game to test."));
+                    break;
+                case 9:
+                    this.games.add(new Game("Game " + (i + 1), "Strategy", "A game to test."));
+                    break;
+            }
         }
     }
 

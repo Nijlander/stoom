@@ -49,6 +49,15 @@ public class Game {
         return description;
     }
 
+    /**
+     * returnt de categorie van het product
+     *
+     * @return categorie
+     */
+    public String getCategory() {
+        return category;
+    }
+
     @Override
     public String toString() {
         return "Game{" +
