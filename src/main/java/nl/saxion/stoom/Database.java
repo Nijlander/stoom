@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Database {
 
     private ArrayList<Game> games;
+    private ArrayList<Game> ownedGames;
 
     /**
      * constructor
      */
     public Database() {
         games = new ArrayList<>();
+        ownedGames = new ArrayList<>();
 
         populateGames(100);
     }
@@ -63,5 +65,18 @@ public class Database {
      */
     public ArrayList<Game> getGames() {
         return games;
+    }
+
+    /**
+     * gets all games which the user owns
+     *
+     * @return list of games
+     */
+    public ArrayList<Game> getOwnedGames() {
+        return ownedGames;
+    }
+
+    public void buyGame(Game g) {
+        this.ownedGames.add(g);
     }
 }
