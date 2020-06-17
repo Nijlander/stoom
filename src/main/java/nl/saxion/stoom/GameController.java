@@ -3,7 +3,6 @@ package nl.saxion.stoom;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Controller
@@ -11,48 +10,58 @@ import java.util.ArrayList;
 public class GameController {
 
     private final Database db = new Database();
+    private ArrayList<Game> games = db.getGames();
+    private ArrayList<Game> owned = db.getOwnedGames();
 
+    /**
+     * returns all games when the user travels to /store/games/all
+     *
+     * @return list of games
+     */
     @GetMapping("/all")
     @ResponseBody
     public String getGames() {
-        return db.getGames().toString();
+        return games.toString();
     }
 
+    /**
+     * returns all games that fall under a certain category when the users travels to /store/games/{category}
+     *
+     * @param category wildcard indicating the category that needs to be used
+     * @return list of games
+     */
     @GetMapping("/{category}")
     @ResponseBody
     public String getGamesByCategory(@PathVariable String category) {
-        ArrayList<Game> list = db.getGames();
-        ArrayList<Game> newList = new ArrayList<>();
+        ArrayList<Game> list = new ArrayList<>();
 
-        for (Game game : list) {
+        for (Game game : games) {
             if (game.getCategory().equalsIgnoreCase(category)) {
-                newList.add(game);
+                list.add(game);
             }
         }
 
-        return newList.toString();
+        return list.toString();
     }
 
-//    @GetMapping("/{category}/game")
-//    @ResponseBody
-//    public String getGameByCategory(@PathVariable String category, RequestParam("id")
-//
-//    int id)
-//
-//    {
-//        ArrayList<Game> list = db.getGames();
-//        ArrayList<Game> newList = new ArrayList<>();
-//
-//        for (Game game : list) {
-//            if(game.)
-//        }
-//    }
-
-    @GetMapping("/game")
+    /**
+     * returns a game that falls under a specific category and id when the user travels to /store/games/{category}/game?id={id}
+     *
+     * @param id       the id of the game that needs to be shown
+     * @param category the category the game falls under
+     * @return the selected game
+     */
+    @GetMapping("/{category}/game")
     @ResponseBody
-    public String getGame(@RequestParam("id") int id) {
-        ArrayList<Game> list = db.getGames();
+    public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category) {
+        ArrayList<Game> list = new ArrayList<>();
         Game g = null;
+
+        for (Game game : games) {
+            if (game.getCategory().equalsIgnoreCase(category)) {
+                list.add(game);
+            }
+        }
 
         for (Game game : list) {
             if (game.getId() == id) {
@@ -63,5 +72,43 @@ public class GameController {
         return g.toString();
     }
 
+    /**
+     * returns a game that falls under a specific id
+     *
+     * @param id the id of the game
+     * @return the specified game
+     */
+    @GetMapping("/all/game")
+    @ResponseBody
+    public String getGameById(@RequestParam("id") int id) {
+        Game g = null;
 
+        for (Game game : games) {
+            if (game.getId() == id) {
+                g = game;
+            }
+        }
+
+        return g.toString();
+    }
+
+    @GetMapping("/buy")
+    @ResponseBody
+    public void buyGame(@RequestParam("id") int id) {
+        Game g = null;
+
+        for (Game game : games) {
+            if (game.getId() == id) {
+                g = game;
+            }
+        }
+
+        db.buyGame(g);
+    }
+
+    @GetMapping("/owned")
+    @ResponseBody
+    public String getOwnedGames() {
+        return owned.toString();
+    }
 }
