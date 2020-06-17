@@ -1,8 +1,9 @@
 package nl.saxion.stoom;
 
-public class Product {
+public class Game {
 
-    private static int id;
+    private static int nextId = 1;
+    private final int id;
     private String name;
     private String category;
     private String description;
@@ -14,7 +15,8 @@ public class Product {
      * @param category    categorie waar het product tot toebehoord
      * @param description beschrijving van het product
      */
-    public Product(String name, String category, String description) {
+    public Game(String name, String category, String description) {
+        this.id = nextId++;
         this.name = name;
         this.category = category;
         this.description = description;
@@ -25,14 +27,14 @@ public class Product {
      *
      * @return id
      */
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * returnt de naam van het product
      *
-     * @return
+     * @return naam
      */
     public String getName() {
         return name;
@@ -41,9 +43,19 @@ public class Product {
     /**
      * returnt de beschrijving van het product
      *
-     * @return
+     * @return beschrijving
      */
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
