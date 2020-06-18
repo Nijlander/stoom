@@ -92,6 +92,11 @@ public class GameController {
         return g.toString();
     }
 
+    /**
+     * stores a game into the library
+     *
+     * @param id id of the game that needs to be stored
+     */
     @GetMapping("/buy")
     @ResponseBody
     public void buyGame(@RequestParam("id") int id) {
