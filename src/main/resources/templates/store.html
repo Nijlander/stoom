@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>STORE</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-<p>GOODMORNING MOTHERFUCKER, IT WORKS</p>
-//pulls data from movie
-<p th:text="${movie}"></p>
+   <p>GOODMORNING MOTHERFUCKER,  IT WORKS</p>
+   <p>MENDING koekeloe</p>
+
+<ul th:each="game : ${allGames}">
+    <li >
+        <p th:text="${game.id}" class="p"></p>
+        <p th:text="${game.name}" class="p"></p>
+        <p th:text="${game.category}" class="p"></p>
+        <p th:text="${game.description}" class="p"></p>
+    </li>
+</ul>
+
 </body>
 </a>
 </html>

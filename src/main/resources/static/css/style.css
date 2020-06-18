@@ -1,0 +1,20 @@
+li  {
+    display:block;
+    border: lime;
+    align-self: center;
+    background: gray;
+    font-size: large;
+}
+
+ul  {
+    display: block;
+    border: blue;
+    align-self: center;
+    background-color: #000040;
+
+}
+
+.p{
+    background-color: #000000;
+    color: white;
+}

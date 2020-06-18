@@ -1,6 +1,7 @@
 package nl.saxion.stoom;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,9 +20,9 @@ public class GameController {
      * @return list of games
      */
     @GetMapping("/all")
-    @ResponseBody
-    public String getGames() {
-        return games.toString();
+    public String getGames(Model model) {
+        model.addAttribute("allGames", games);
+        return "store";
     }
 
     /**
