@@ -20,8 +20,8 @@ public class Database {
         music = new ArrayList<>();
         ownedMusic = new ArrayList<>();
 
-        populateGames(50);
-        populateMusic(15);
+//        populateGames(50);
+        populateMusic(20);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Database {
      *
      * @param amount the amount of music that needs to be stored
      */
-    public void populateMusic(int amount) {
+    private void populateMusic(int amount) {
         for (int i = 0; i < amount; i++) {
             int rand = (int) (Math.random() * 3) + 1;
 

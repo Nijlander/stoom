@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @RequestMapping("/store/music")
 public class MusicController {
 
-    private final Database db = new Database();
+    private Database db = new Database();
     private ArrayList<Music> music = db.getMusic();
     private ArrayList<Music> owned = db.getOwnedMusic();
 

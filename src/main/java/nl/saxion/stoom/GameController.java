@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @RequestMapping("/store/games")
 public class GameController {
 
-    private final Database db = new Database();
+    private Database db = new Database();
     private ArrayList<Game> games = db.getGames();
     private ArrayList<Game> owned = db.getOwnedGames();
 
