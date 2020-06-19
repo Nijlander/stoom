@@ -20,7 +20,7 @@ public class Database {
         music = new ArrayList<>();
         ownedMusic = new ArrayList<>();
 
-//        populateGames(50);
+        populateGames(50);
         populateMusic(20);
     }
 

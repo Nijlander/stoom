@@ -1,0 +1,36 @@
+div.store-options-grid {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+}
+
+a.store-option {
+    width: 100%;
+    height: 300px;
+    color: #fff;
+    text-align: center;
+    line-height: 300px;
+    text-decoration: none;
+    font-family: "Roboto";
+    font-size: 2em;
+    font-weight: 300;
+    transition: all 0.2s;
+}
+
+a.store-option:hover {
+    transform: scale(1.05);
+}
+
+a.games-option {
+    background: linear-gradient(to bottom left, #DA5844, #DA4496);
+}
+
+a.movies-option {
+    background: linear-gradient(to bottom left, #44DA56, #44D8DA);
+}
+
+a.music-option {
+    background: linear-gradient(to bottom left, #5F44DA, #B844DA);
+}

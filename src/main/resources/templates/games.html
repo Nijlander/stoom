@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stoom - Games</title>
+    <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/games.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="top-bar">
+    <div class="nav">
+        <h1 class="brand">Stoom</h1>
+        <ul class="nav-items">
+            <li class="nav-item">
+                <a href="#">Library</a>
+            </li>
+            <li class="nav-item">
+                <a href="/store">Store</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <h1 th:text="${filter}" class="header">All</h1>
+    <div class="product-grid">
+        <ul class="filter-list">
+            <li class="filter-item">
+                <a href="/store/games/all">All</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/action">Action</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/adventure">Adventure</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/casual">Casual</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/indie">Indie</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/racing">Racing</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/roleplaying">Roleplaying</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/simulation">Simulation</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/sports">Sports</a>
+            </li>
+            <li class="filter-item">
+                <a href="/store/games/strategy">Strategy</a>
+            </li>
+        </ul>
+        <ul class="product-list">
+            <li th:each="product : ${allGames}" class="product-item">
+                <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
+                     alt="Placeholder">
+                <div class="product-information">
+                    <h1 th:text="${product.getName()}">}</h1>
+                    <p class="product-category" th:text="${product.getCategory()}"></p>
+                    <p class="product-description" th:text="${product.getDescription()}"></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -21,8 +21,9 @@ public class GameController {
      */
     @GetMapping("/all")
     public String getGames(Model model) {
+        model.addAttribute("filter", "All Games");
         model.addAttribute("allGames", games);
-        return "store";
+        return "games";
     }
 
     /**
@@ -32,8 +33,7 @@ public class GameController {
      * @return list of games
      */
     @GetMapping("/{category}")
-    @ResponseBody
-    public String getGamesByCategory(@PathVariable String category) {
+    public String getGamesByCategory(@PathVariable String category, Model model) {
         ArrayList<Game> list = new ArrayList<>();
 
         for (Game game : games) {
@@ -42,7 +42,10 @@ public class GameController {
             }
         }
 
-        return list.toString();
+        model.addAttribute("filter", category.substring(0, 1).toUpperCase() + category.substring(1) + " Games");
+        model.addAttribute("allGames", list);
+
+        return "games";
     }
 
     /**
