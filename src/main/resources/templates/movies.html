@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stoom - Games</title>
+    <title>Stoom - Movies</title>
     <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/games.css}" rel="stylesheet"/>
@@ -29,45 +29,33 @@
     <div class="product-grid">
         <ul class="filter-list">
             <li class="filter-item">
-                <a href="/store/games/all">All</a>
+                <a href="/store/movies/all">All</a>
             </li>
             <li class="filter-item">
-                <a href="/store/games/action">Action</a>
+                <a href="/store/movies/adventure">Adventure</a>
             </li>
             <li class="filter-item">
-                <a href="/store/games/adventure">Adventure</a>
+                <a href="/store/movies/action">Action</a>
             </li>
             <li class="filter-item">
-                <a href="/store/games/casual">Casual</a>
+                <a href="/store/movies/drama">Drama</a>
             </li>
             <li class="filter-item">
-                <a href="/store/games/indie">Indie</a>
+                <a href="/store/movies/comedy">Comedy</a>
             </li>
             <li class="filter-item">
-                <a href="/store/games/racing">Racing</a>
-            </li>
-            <li class="filter-item">
-                <a href="/store/games/roleplaying">Roleplaying</a>
-            </li>
-            <li class="filter-item">
-                <a href="/store/games/simulation">Simulation</a>
-            </li>
-            <li class="filter-item">
-                <a href="/store/games/sports">Sports</a>
-            </li>
-            <li class="filter-item">
-                <a href="/store/games/strategy">Strategy</a>
+                <a href="/store/movies/thriller">Thriller</a>
             </li>
         </ul>
         <ul class="product-list">
-            <li th:each="product : ${allGames}" class="product-item">
+            <li th:each="product : ${allMovies}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
-                    <h1 th:text="${product.getName()}">}</h1>
-                    <p class="product-category" th:text="${product.getCategory()}"></p>
+                    <h1 th:text="${product.getTitle()}">}</h1>
+                    <p class="product-category" th:text="${product.getGenre()}"></p>
                     <p class="product-description" th:text="${product.getDescription()}"></p>
-                    <a th:href="@{'/store/games/' + ${filterUrl} + '/game?id=' + ${product.getId()}}">Learn more</a>
+                    <a th:href="@{'/store/movies/' + ${filterUrl} + '/movie?id=' + ${product.getId()}}">Learn more</a>
                 </div>
             </li>
         </ul>

@@ -10,6 +10,10 @@ public class Database {
     private ArrayList<Music> music;
     private ArrayList<Music> ownedMusic;
 
+    private ArrayList<Movie> movies;
+    private ArrayList<Movie> ownedMovies;
+
+
     /**
      * constructor
      */
@@ -20,8 +24,12 @@ public class Database {
         music = new ArrayList<>();
         ownedMusic = new ArrayList<>();
 
+        movies = new ArrayList<>();
+        ownedMovies = new ArrayList<>();
+
         populateGames(50);
-        populateMusic(20);
+        populateMusic(50);
+        populateMovies(50);
     }
 
     /**
@@ -35,31 +43,31 @@ public class Database {
 
             switch (rand) {
                 case 1:
-                    this.games.add(new Game("Game " + (i + 1), "Action", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Action", "A game to test."));
                     break;
                 case 2:
-                    this.games.add(new Game("Game " + (i + 1), "Adventure", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Adventure", "A game to test."));
                     break;
                 case 3:
-                    this.games.add(new Game("Game " + (i + 1), "Casual", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Casual", "A game to test."));
                     break;
                 case 4:
-                    this.games.add(new Game("Game " + (i + 1), "Indie", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Indie", "A game to test."));
                     break;
                 case 5:
-                    this.games.add(new Game("Game " + (i + 1), "Racing", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Racing", "A game to test."));
                     break;
                 case 6:
-                    this.games.add(new Game("Game " + (i + 1), "Roleplaying", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Roleplaying", "A game to test."));
                     break;
                 case 7:
-                    this.games.add(new Game("Game " + (i + 1), "Simulation", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Simulation", "A game to test."));
                     break;
                 case 8:
-                    this.games.add(new Game("Game " + (i + 1), "Sports", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Sports", "A game to test."));
                     break;
                 case 9:
-                    this.games.add(new Game("Game " + (i + 1), "Strategy", "A game to test."));
+                    this.games.add(new Game(i + 1, "Game " + (i + 1), "Strategy", "A game to test."));
                     break;
             }
         }
@@ -76,13 +84,37 @@ public class Database {
 
             switch (rand) {
                 case 1:
-                    this.music.add(new Music("Music title " + (i + 1), "Rens Nijland", "Pop"));
+                    this.music.add(new Music(i + 1, "Music title " + (i + 1), "Pop", "Rens Nijland"));
                     break;
                 case 2:
-                    this.music.add(new Music("Music title " + (i + 1), "Rens Nijland", "Electric"));
+                    this.music.add(new Music(i + 1, "Music title " + (i + 1), "Electronic", "Rens Nijland"));
                     break;
                 case 3:
-                    this.music.add(new Music("Music title " + (i + 1), "Rens Nijland", "Hardstyle"));
+                    this.music.add(new Music(i + 1, "Music title " + (i + 1), "Hardstyle", "Rens Nijland"));
+                    break;
+            }
+        }
+    }
+
+    private void populateMovies(int amount) {
+        for (int i = 0; i < amount; i++) {
+            int rand = (int) (Math.random() * 5) + 1;
+
+            switch (rand) {
+                case 1:
+                    this.movies.add(new Movie(i + 1, "Movie " + (i + 1), "Adventure", "A movie to test."));
+                    break;
+                case 2:
+                    this.movies.add(new Movie(i + 1, "Movie " + (i + 1), "Action", "A movie to test."));
+                    break;
+                case 3:
+                    this.movies.add(new Movie(i + 1, "Movie " + (i + 1), "Drama", "A movie to test."));
+                    break;
+                case 4:
+                    this.movies.add(new Movie(i + 1, "Movie " + (i + 1), "Comedy", "A movie to test."));
+                    break;
+                case 5:
+                    this.movies.add(new Movie(i + 1, "Movie " + (i + 1), "Thriller", "A movie to test."));
                     break;
             }
         }
@@ -125,6 +157,24 @@ public class Database {
     }
 
     /**
+     * gets all movies stored in the database
+     *
+     * @return list of movies
+     */
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    /**
+     * gets all the movies which the user owns
+     *
+     * @return list of movies
+     */
+    public ArrayList<Movie> getOwnedMovies() {
+        return ownedMovies;
+    }
+
+    /**
      * stores a selected game into the owned games list
      *
      * @param g game that needs to be stored
@@ -140,5 +190,14 @@ public class Database {
      */
     public void buyMusic(Music m) {
         this.ownedMusic.add(m);
+    }
+
+    /**
+     * stores a selected movie into the owned movies list
+     *
+     * @param m movie that needs to be stored
+     */
+    public void buyMovie(Movie m) {
+        this.ownedMovies.add(m);
     }
 }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stoom - Game</title>
+    <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/game.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="top-bar">
+    <div class="nav">
+        <h1 class="brand">Stoom</h1>
+        <ul class="nav-items">
+            <li class="nav-item">
+                <a href="#">Library</a>
+            </li>
+            <li class="nav-item">
+                <a href="/store">Store</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+<div class="container">
+    <div class="info-grid">
+        <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg" alt="Placeholder">
+        <div class="info-details">
+            <div class="info-bar"></div>
+            <h1 th:text="${music.getTitle()}">Failed to load</h1>
+            <p th:text="${music.getGenre()}" class="category-info">Failed to load</p>
+            <p th:text="${music.getArtist()}" class="description-info"></p>
+        </div>
+        <div class="product-controls">
+            <a th:href="@{'/store/music/buy?id=' + ${music.getId()}}" class="btn btn-buy">Buy</a>
+            <a th:href="@{'/store/music/' + ${lastPage}}"
+               class="btn btn-back">Back</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

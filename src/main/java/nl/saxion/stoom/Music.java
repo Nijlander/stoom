@@ -2,8 +2,7 @@ package nl.saxion.stoom;
 
 public class Music {
 
-    private static int nextId = 1;
-    private final int id;
+    private int id;
     private String title;
     private String genre;
     private String artist;
@@ -15,8 +14,8 @@ public class Music {
      * @param genre  genre van het liedje
      * @param artist artiest van het liedje
      */
-    public Music(String title, String genre, String artist) {
-        this.id = nextId++;
+    public Music(int id, String title, String genre, String artist) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.artist = artist;

@@ -2,8 +2,7 @@ package nl.saxion.stoom;
 
 public class Game {
 
-    private static int nextId = 1;
-    private final int id;
+    private int id;
     private String name;
     private String category;
     private String description;
@@ -15,8 +14,8 @@ public class Game {
      * @param category    categorie waar het product tot toebehoord
      * @param description beschrijving van het product
      */
-    public Game(String name, String category, String description) {
-        this.id = nextId++;
+    public Game(int id, String name, String category, String description) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.description = description;

@@ -1,6 +1,7 @@
 package nl.saxion.stoom;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ public class MusicController {
      * @return list of music
      */
     @GetMapping("/all")
-    @ResponseBody
-    public String getMusic() {
-        return music.toString();
+    public String getMusic(Model model) {
+        model.addAttribute("filter", "All Music");
+        model.addAttribute("filterUrl", "all");
+        model.addAttribute("allMusic", music);
+
+        return "music";
     }
 
     /**
@@ -31,8 +35,7 @@ public class MusicController {
      * @return list of music
      */
     @GetMapping("/{genre}")
-    @ResponseBody
-    public String getMusicByGenre(@PathVariable String genre) {
+    public String getMusicByGenre(@PathVariable String genre, Model model) {
         ArrayList<Music> list = new ArrayList<>();
 
         for (Music music : music) {
@@ -41,7 +44,11 @@ public class MusicController {
             }
         }
 
-        return list.toString();
+        model.addAttribute("filter", genre.substring(0, 1).toUpperCase() + genre.substring(1));
+        model.addAttribute("filterUrl", genre.toLowerCase());
+        model.addAttribute("allMusic", list);
+
+        return "music";
     }
 
     /**
@@ -52,8 +59,7 @@ public class MusicController {
      * @return the selected song
      */
     @GetMapping("/{genre}/music")
-    @ResponseBody
-    public String getMusicByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre) {
+    public String getMusicByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre, Model model) {
         ArrayList<Music> list = new ArrayList<>();
         Music m = null;
 
@@ -69,7 +75,10 @@ public class MusicController {
             }
         }
 
-        return m.toString();
+        model.addAttribute("music", m);
+        model.addAttribute("lastPage", genre.toLowerCase());
+
+        return "song";
     }
 
     /**
@@ -79,8 +88,7 @@ public class MusicController {
      * @return the specified song
      */
     @GetMapping("/all/music")
-    @ResponseBody
-    public String getMusicById(@RequestParam("id") int id) {
+    public String getMusicById(@RequestParam("id") int id, Model model) {
         Music m = null;
 
         for (Music music : music) {
@@ -89,7 +97,10 @@ public class MusicController {
             }
         }
 
-        return m.toString();
+        model.addAttribute("music", m);
+        model.addAttribute("lastPage", "all");
+
+        return "song";
     }
 
     /**
@@ -98,8 +109,7 @@ public class MusicController {
      * @param id id of the song that needs to be stored
      */
     @GetMapping("/buy")
-    @ResponseBody
-    public void buyMusic(@RequestParam("id") int id) {
+    public String buyMusic(@RequestParam("id") int id, Model model) {
         Music m = null;
 
         for (Music music : music) {
@@ -109,6 +119,10 @@ public class MusicController {
         }
 
         db.buyMusic(m);
+
+        model.addAttribute("productType", "music");
+
+        return "redirect";
     }
 
     @GetMapping("/owned")

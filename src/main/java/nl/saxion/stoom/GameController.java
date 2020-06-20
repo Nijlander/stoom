@@ -22,7 +22,9 @@ public class GameController {
     @GetMapping("/all")
     public String getGames(Model model) {
         model.addAttribute("filter", "All Games");
+        model.addAttribute("filterUrl", "all");
         model.addAttribute("allGames", games);
+
         return "games";
     }
 
@@ -43,6 +45,7 @@ public class GameController {
         }
 
         model.addAttribute("filter", category.substring(0, 1).toUpperCase() + category.substring(1) + " Games");
+        model.addAttribute("filterUrl", category.toLowerCase());
         model.addAttribute("allGames", list);
 
         return "games";
@@ -56,8 +59,7 @@ public class GameController {
      * @return the selected game
      */
     @GetMapping("/{category}/game")
-    @ResponseBody
-    public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category) {
+    public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category, Model model) {
         ArrayList<Game> list = new ArrayList<>();
         Game g = null;
 
@@ -73,7 +75,10 @@ public class GameController {
             }
         }
 
-        return g.toString();
+        model.addAttribute("game", g);
+        model.addAttribute("lastPage", category.toLowerCase());
+
+        return "game";
     }
 
     /**
@@ -83,8 +88,7 @@ public class GameController {
      * @return the specified game
      */
     @GetMapping("/all/game")
-    @ResponseBody
-    public String getGameById(@RequestParam("id") int id) {
+    public String getGameById(@RequestParam("id") int id, Model model) {
         Game g = null;
 
         for (Game game : games) {
@@ -93,7 +97,10 @@ public class GameController {
             }
         }
 
-        return g.toString();
+        model.addAttribute("game", g);
+        model.addAttribute("lastPage", "all");
+
+        return "game";
     }
 
     /**
@@ -102,8 +109,7 @@ public class GameController {
      * @param id id of the game that needs to be stored
      */
     @GetMapping("/buy")
-    @ResponseBody
-    public void buyGame(@RequestParam("id") int id) {
+    public String buyGame(@RequestParam("id") int id, Model model) {
         Game g = null;
 
         for (Game game : games) {
@@ -113,6 +119,10 @@ public class GameController {
         }
 
         db.buyGame(g);
+
+        model.addAttribute("productType", "games");
+
+        return "redirect";
     }
 
     @GetMapping("/owned")
