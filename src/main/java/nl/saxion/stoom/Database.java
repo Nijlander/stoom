@@ -37,6 +37,8 @@ public class Database {
 
         accounts.add(new Account("RensNijland", "Test123"));
         accounts.add(new Account("ThijsVoshaar", "Test123"));
+        accounts.add(new Account("RichardBevers", "Test123"));
+        accounts.add(new Account("RuudGreven", "Test123"));
     }
 
     /**

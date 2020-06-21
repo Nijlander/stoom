@@ -9,7 +9,6 @@
     <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/products.css}" rel="stylesheet"/>
-    <link th:href="@{/css/games.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="top-bar">
@@ -29,13 +28,12 @@
     </div>
 </div>
 <div class="container">
-    <h1 th:text="${filter}" class="header">All</h1>
+    <h1 th:if="${type.equalsIgnoreCase('games')}" th:text="${headerTitle}" class="header header-color-games"></h1>
+    <h1 th:if="${type.equalsIgnoreCase('movies')}" th:text="${headerTitle}" class="header header-color-movies"></h1>
+    <h1 th:if="${type.equalsIgnoreCase('music')}" th:text="${headerTitle}" class="header header-color-music"></h1>
     <div class="product-grid">
         <ul class="filter-list">
-            <li class="filter-item">
-                <a href="/library/all">All</a>
-            </li>
-            <li class="filter-item">
+            <li class="filter-item-first">
                 <a href="/library/movies">Movies</a>
             </li>
             <li class="filter-item">

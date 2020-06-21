@@ -26,17 +26,19 @@ public class LibraryController extends Database {
             if (filter.equalsIgnoreCase("games")) {
                 model.addAttribute("gameList", getOwnedGames());
                 model.addAttribute("type", "games");
+                model.addAttribute("headerTitle", "Your owned games");
             } else if (filter.equalsIgnoreCase("music")) {
                 model.addAttribute("musicList", getOwnedMusic());
                 model.addAttribute("type", "music");
+                model.addAttribute("headerTitle", "Your owned music");
             } else if (filter.equalsIgnoreCase("movies")) {
                 model.addAttribute("movieList", getOwnedMovies());
                 model.addAttribute("type", "movies");
+                model.addAttribute("headerTitle", "Your owned movies");
             }
 
             return "library";
         }
-
         return "redirect:/logout";
     }
 }

@@ -35,6 +35,28 @@ li.filter-item a {
     box-sizing: border-box;
 }
 
+li.filter-item-first {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+li.filter-item-first a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto";
+    font-size: 1em;
+    font-weight: 300;
+    color: #000;
+    background-color: #E4E4E4;
+    padding: 25px;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
 li.filter-item:first-of-type a {
     background: #0275d8;
     margin-bottom: 10px;
@@ -54,6 +76,14 @@ li.filter-item a:active {
     background-color: #cccccc;
 }
 
+li.filter-item-first a:hover {
+    background-color: #cccccc;
+}
+
+li.filter-item-first a:active {
+    background-color: #cccccc;
+}
+
 ul.product-list {
     padding: 0;
     margin: 0;
@@ -66,7 +96,7 @@ li.product-item {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 2fr;
     grid-column-gap: 10px;
-    padding: 10px 10px 20px 0;
+    padding: 10px 10px 10px 0;
     margin-bottom: 10px;
 }
 
@@ -125,5 +155,17 @@ div.product-information a {
     text-decoration: none;
     font-size: 0.9em;
     text-align: center;
+}
+
+h1.header-color-music {
+    background: linear-gradient(to bottom left, #5F44DA, #B844DA);
+}
+
+h1.header-color-games {
+    background: linear-gradient(to bottom left, #DA5844, #DA4496);
+}
+
+h1.header-color-movies {
+    background: linear-gradient(to bottom left, #44DA56, #44D8DA);
 }
 
