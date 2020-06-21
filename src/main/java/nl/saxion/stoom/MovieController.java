@@ -11,12 +11,12 @@ import java.util.ArrayList;
 @RequestMapping("/store/movies")
 public class MovieController extends Database {
 
-    private ArrayList<Movie> owned = getOwnedMovies();
-
     /**
-     * returns all movies when the user travels to /store/movies/all
+     * returns all movies that are stored in the database
      *
-     * @return list of movies
+     * @param model   model for routing and databinding
+     * @param session for accessibilty check
+     * @return
      */
     @GetMapping("/all")
     public String getMovies(Model model, HttpSession session) {
@@ -27,15 +27,16 @@ public class MovieController extends Database {
 
             return "movies";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns all movies that fall under a certain genre when the users travels to /store/movies/{genre}
+     * returns all movies that fall under a certain genre
      *
-     * @param genre wildcard indicating the genre that needs to be used
-     * @return list of movies
+     * @param genre   genre specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/{genre}")
     public String getMoviesByGenre(@PathVariable String genre, Model model, HttpSession session) {
@@ -54,16 +55,17 @@ public class MovieController extends Database {
 
             return "movies";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns a game that falls under a specific genre and id when the user travels to /store/movies/{genre}/movie?id={id}
+     * returns a movie that falls under a specific id and category
      *
-     * @param id    the id of the movie that needs to be shown
-     * @param genre the genre the movie falls under
-     * @return the selected movie
+     * @param id      specified in the URI
+     * @param genre   specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/{genre}/movie")
     public String getMovieByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre, Model model, HttpSession session) {
@@ -88,15 +90,17 @@ public class MovieController extends Database {
 
             return "movie";
         }
-
         return "redirect:/logout";
     }
+
 
     /**
      * returns a movie that falls under a specific id
      *
-     * @param id the id of the movie
-     * @return the specified movie
+     * @param id      id specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/all/movie")
     public String getMovieById(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -114,14 +118,16 @@ public class MovieController extends Database {
 
             return "movie";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * stores a movie into the library
+     * stores a movie in the owned movies list
      *
-     * @param id id of the movie that needs to be stored
+     * @param id      id specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/buy")
     public String buyMovie(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -141,30 +147,29 @@ public class MovieController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
     }
 
     /**
      * returns the add movie page
      *
-     * @return page that needs to be shown
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/add")
     public String getAddPage(HttpSession session) {
         if (session.getAttribute("username") != null) {
             return "addmovie";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * adds the entered information into a movie and saves it to the database
+     * adds a new movie to the movies list stored in the database
      *
-     * @param movie   movie that needs to be saved
-     * @param model   model needed for routing purposes
-     * @param session session needed for authentication
+     * @param movie   movie that needs to be stored
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
      * @return
      */
     @PostMapping("/add")
@@ -179,13 +184,6 @@ public class MovieController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
-    }
-
-    @GetMapping("/owned")
-    @ResponseBody
-    public String getgeOwnedMovies() {
-        return owned.toString();
     }
 }

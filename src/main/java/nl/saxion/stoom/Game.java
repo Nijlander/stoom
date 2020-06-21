@@ -10,9 +10,10 @@ public class Game {
     /**
      * constructor
      *
-     * @param name        naam van het product
-     * @param category    categorie waar het product tot toebehoord
-     * @param description beschrijving van het product
+     * @param id          id of the game
+     * @param name        name of the game
+     * @param category    category of the game
+     * @param description description of the game
      */
     public Game(int id, String name, String category, String description) {
         this.id = id;
@@ -22,7 +23,7 @@ public class Game {
     }
 
     /**
-     * returnt het id van het product
+     * returns the id of the game
      *
      * @return id
      */
@@ -31,36 +32,36 @@ public class Game {
     }
 
     /**
-     * returnt de naam van het product
+     * returns the name of the game
      *
-     * @return naam
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * returnt de beschrijving van het product
+     * returns the description of the game
      *
-     * @return beschrijving
+     * @return description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * returnt de categorie van het product
+     * returns the category of the game
      *
-     * @return categorie
+     * @return category
      */
     public String getCategory() {
         return category;
     }
 
     /**
-     * zet de id van het product
+     * sets the id of the game
      *
-     * @param id id van het desbetreffende product
+     * @param id id of the game
      */
     public void setId(int id) {
         this.id = id;

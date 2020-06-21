@@ -10,9 +10,10 @@ public class Music {
     /**
      * constructor
      *
-     * @param title  titel van het liedje
-     * @param genre  genre van het liedje
-     * @param artist artiest van het liedje
+     * @param id     id of the song
+     * @param title  title of the song
+     * @param genre  genre of the song
+     * @param artist artist of the song
      */
     public Music(int id, String title, String genre, String artist) {
         this.id = id;
@@ -22,45 +23,45 @@ public class Music {
     }
 
     /**
-     * returnt het id van het liedje
+     * returns the id of the song
      *
-     * @return id
+     * @return
      */
     public int getId() {
         return id;
     }
 
     /**
-     * returnt de titel van het liedje
+     * returns the title of the song
      *
-     * @return titel
+     * @return
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * returnt de genre van het liedje
+     * returns the genre of the song
      *
-     * @return genre
+     * @return
      */
     public String getGenre() {
         return genre;
     }
 
     /**
-     * returnt de artiest van het liedje
+     * returns the artist of the song
      *
-     * @return artiest
+     * @return
      */
     public String getArtist() {
         return artist;
     }
 
     /**
-     * zet het id van het liedje
+     * sets the id of the song
      *
-     * @param id id van het liedje
+     * @param id that needs to be set
      */
     public void setId(int id) {
         this.id = id;

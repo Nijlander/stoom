@@ -11,13 +11,12 @@ import java.util.ArrayList;
 @RequestMapping("/store/music")
 public class MusicController extends Database {
 
-
-    private ArrayList<Music> owned = getOwnedMusic();
-
     /**
-     * returns all music when the user travels to /store/music/all
+     * returns all the music stored in the database
      *
-     * @return list of music
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/all")
     public String getMusic(Model model, HttpSession session) {
@@ -28,15 +27,16 @@ public class MusicController extends Database {
 
             return "music";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns all music that falls under a certain category when the users travels /store/music/{genre}
+     * returns all the music that falls under a specific genre
      *
-     * @param genre wildcard indicating the category that needs to be used
-     * @return list of music
+     * @param genre   genre specified in URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/{genre}")
     public String getMusicByGenre(@PathVariable String genre, Model model, HttpSession session) {
@@ -55,16 +55,17 @@ public class MusicController extends Database {
 
             return "music";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns a song that falls under a specific category and id when the user travels to /store/music/{category}/music?id={id}
+     * returns a song that falls under a specific genre and id
      *
-     * @param id    the id of the song that needs to be shown
-     * @param genre the genre the song falls under
-     * @return the selected song
+     * @param id      id specified in the URI
+     * @param genre   genre specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/{genre}/music")
     public String getMusicByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre, Model model, HttpSession session) {
@@ -89,15 +90,16 @@ public class MusicController extends Database {
 
             return "song";
         }
-
         return "redirect:/logout";
     }
 
     /**
      * returns a song that falls under a specific id
      *
-     * @param id the id of the song
-     * @return the specified song
+     * @param id      id specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/all/music")
     public String getMusicById(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -115,14 +117,16 @@ public class MusicController extends Database {
 
             return "song";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * stores a song into the library
+     * stores a song into the owned songs list
      *
-     * @param id id of the song that needs to be stored
+     * @param id      id specified in the URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/buy")
     public String buyMusic(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -142,30 +146,29 @@ public class MusicController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
     }
 
     /**
      * returns the add music page
      *
-     * @return page that needs to be shown
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/add")
     public String getAddPage(HttpSession session) {
         if (session.getAttribute("username") != null) {
             return "addmusic";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * adds the entered information into a song and saves it to the database
+     * adds a new song into the music list stored in the database
      *
-     * @param song    song that needs to be saved
-     * @param model   model needed for routing purposes
-     * @param session session needed for authentication
+     * @param song    song that needs to be stored
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
      * @return
      */
     @PostMapping("/add")
@@ -180,15 +183,6 @@ public class MusicController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
     }
-
-    @GetMapping("/owned")
-    @ResponseBody
-    public String getGeOwnedMusic() {
-        return owned.toString();
-    }
-
-
 }

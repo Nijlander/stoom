@@ -81,7 +81,7 @@ public class Database {
     }
 
     /**
-     * Populates the database with random music
+     * populates the database with random music
      *
      * @param amount the amount of music that needs to be stored
      */
@@ -103,6 +103,11 @@ public class Database {
         }
     }
 
+    /**
+     * populates the database with random movies
+     *
+     * @param amount the amount of movies that needs to be stored
+     */
     private void populateMovies(int amount) {
         for (int i = 0; i < amount; i++) {
             int rand = (int) (Math.random() * 5) + 1;

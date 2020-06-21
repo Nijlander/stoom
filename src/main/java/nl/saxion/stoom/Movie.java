@@ -10,9 +10,10 @@ public class Movie {
     /**
      * constructor
      *
-     * @param title       titel van de film
-     * @param genre       genre van de film
-     * @param description beschrijving van de film
+     * @param id          id of the movie
+     * @param title       title of the movie
+     * @param genre       genre of the movie
+     * @param description description of the movie
      */
     public Movie(int id, String title, String genre, String description) {
         this.id = id;
@@ -22,45 +23,45 @@ public class Movie {
     }
 
     /**
-     * returnt het id van de film
+     * returns the id of the movie
      *
-     * @return id
+     * @return
      */
     public int getId() {
         return id;
     }
 
     /**
-     * returnt de titel van de film
+     * returns the title of the movie
      *
-     * @return title
+     * @return
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * returnt de genre van de film
+     * returns the genre of the movie
      *
-     * @return genre
+     * @return
      */
     public String getGenre() {
         return genre;
     }
 
     /**
-     * returnt de beschrijving van de film
+     * returns the description of the movie
      *
-     * @return description
+     * @return
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * zet het id van de film
+     * sets the id of the movie
      *
-     * @param id id van de film
+     * @param id id of the movie
      */
     public void setId(int id) {
         this.id = id;

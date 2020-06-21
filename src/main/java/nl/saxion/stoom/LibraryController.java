@@ -7,16 +7,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/library")
-public class LibraryController extends Database{
+public class LibraryController extends Database {
 
-    private ArrayList<Game> ownedGames = getOwnedGames();
-    private ArrayList<Music> ownedMusic = getOwnedMusic();
-    private ArrayList<Movie> ownedMovies = getOwnedMovies();
-
+    /**
+     * filter controls that determine what type of products are visible
+     *
+     * @param filter  filter specified in URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
+     */
     @GetMapping("/{filter}")
     public String getLibrary(@PathVariable String filter, Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {

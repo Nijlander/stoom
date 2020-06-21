@@ -11,15 +11,14 @@ import java.util.ArrayList;
 @RequestMapping("/store/games")
 public class GameController extends Database {
 
-
     private ArrayList<Game> owned = getOwnedGames();
 
-
-
     /**
-     * returns all games when the user travels to /store/games/all
+     * returns all games that are stored in the database
      *
-     * @return list of games
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/all")
     public String getGames(Model model, HttpSession session) {
@@ -30,15 +29,16 @@ public class GameController extends Database {
 
             return "games";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns all games that fall under a certain category when the users travels to /store/games/{category}
+     * returns all games that fall under a specific category
      *
-     * @param category wildcard indicating the category that needs to be used
-     * @return list of games
+     * @param category category specified in the URI
+     * @param model    model for routing and data binding
+     * @param session  for accessibility check
+     * @return
      */
     @GetMapping("/{category}")
     public String getGamesByCategory(@PathVariable String category, Model model, HttpSession session) {
@@ -57,16 +57,17 @@ public class GameController extends Database {
 
             return "games";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns a game that falls under a specific category and id when the user travels to /store/games/{category}/game?id={id}
+     * returns a game that falls under a specific id and category
      *
-     * @param id       the id of the game that needs to be shown
-     * @param category the category the game falls under
-     * @return the selected game
+     * @param id       id specified in URI
+     * @param category category specified in URI
+     * @param model    model for routing and data binding
+     * @param session  for accessibility check
+     * @return
      */
     @GetMapping("/{category}/game")
     public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category, Model model, HttpSession session) {
@@ -91,15 +92,16 @@ public class GameController extends Database {
 
             return "game";
         }
-
         return "redirect:/logout";
     }
 
     /**
      * returns a game that falls under a specific id
      *
-     * @param id the id of the game
-     * @return the specified game
+     * @param id      id specified in URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/all/game")
     public String getGameById(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -117,14 +119,16 @@ public class GameController extends Database {
 
             return "game";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * stores a game into the library
+     * stores a game into the owned games list
      *
-     * @param id id of the game that needs to be stored
+     * @param id      id specified in URI
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/buy")
     public String buyGame(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -144,30 +148,29 @@ public class GameController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * returns the add game page
+     * returns the add game html page
      *
-     * @return page that needs to be shown
+     * @param session for accessibility check
+     * @return
      */
     @GetMapping("/add")
     public String getAddPage(HttpSession session) {
         if (session.getAttribute("username") != null) {
             return "addgame";
         }
-
         return "redirect:/logout";
     }
 
     /**
-     * adds the entered information into a game and saves it to the database
+     * adds a new game to the database containing user specified details
      *
-     * @param game    game that needs to be saved
-     * @param model   model needed for routing purposes
-     * @param session session needed for authentication
+     * @param game    game that needs to be stored
+     * @param model   model for routing and data binding
+     * @param session for accessibility check
      * @return
      */
     @PostMapping("/add")
@@ -182,14 +185,6 @@ public class GameController extends Database {
 
             return "reroute";
         }
-
         return "redirect:/logout";
-    }
-
-
-    @GetMapping("/owned")
-    @ResponseBody
-    public String getgeOwnedGames() {
-        return owned.toString();
     }
 }
