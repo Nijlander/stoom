@@ -11,25 +11,23 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/library")
-public class LibraryController {
+public class LibraryController extends Database{
 
-    private Database db = new Database();
-
-    private ArrayList<Music> ownedMusic = db.getOwnedMusic();
-    private ArrayList<Game> ownedGames = db.getOwnedGames();
-    private ArrayList<Movie> ownedMovies = db.getOwnedMovies();
+    private ArrayList<Game> ownedGames = getOwnedGames();
+    private ArrayList<Music> ownedMusic = getOwnedMusic();
+    private ArrayList<Movie> ownedMovies = getOwnedMovies();
 
     @GetMapping("/{filter}")
     public String getLibrary(@PathVariable String filter, Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
             if (filter.equalsIgnoreCase("games")) {
-                model.addAttribute("list", ownedGames);
+                model.addAttribute("gameList", getOwnedGames());
                 model.addAttribute("type", "games");
             } else if (filter.equalsIgnoreCase("music")) {
-                model.addAttribute("list", ownedMusic);
+                model.addAttribute("musicList", getOwnedMusic());
                 model.addAttribute("type", "music");
             } else if (filter.equalsIgnoreCase("movies")) {
-                model.addAttribute("list", ownedMovies);
+                model.addAttribute("movieList", getOwnedMovies());
                 model.addAttribute("type", "movies");
             }
 

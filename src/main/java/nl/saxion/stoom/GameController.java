@@ -9,11 +9,13 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/store/games")
-public class GameController {
+public class GameController extends Database {
 
-    private Database db = new Database();
-    private ArrayList<Game> games = db.getGames();
-    private ArrayList<Game> owned = db.getOwnedGames();
+
+    private ArrayList<Game> games = getGames();
+    private ArrayList<Game> owned = getOwnedGames();
+
+
 
     /**
      * returns all games when the user travels to /store/games/all
@@ -136,7 +138,7 @@ public class GameController {
                 }
             }
 
-            db.buyGame(g);
+            buyGame(g);
 
             model.addAttribute("productType", "games");
             model.addAttribute("login", false);
@@ -174,7 +176,7 @@ public class GameController {
         if (session.getAttribute("username") != null) {
             game.setId(games.get(games.size() - 1).getId() + 1);
 
-            db.addGame(game);
+            addGame(game);
 
             model.addAttribute("productType", "games");
             model.addAttribute("login", false);
@@ -185,9 +187,10 @@ public class GameController {
         return "redirect:/logout";
     }
 
+
     @GetMapping("/owned")
     @ResponseBody
-    public String getOwnedGames() {
+    public String getgeOwnedGames() {
         return owned.toString();
     }
 }

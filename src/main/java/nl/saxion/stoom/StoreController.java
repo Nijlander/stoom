@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/store")
 public class StoreController {
 
+    Database db = new Database();
+
     @GetMapping("")
     public String getStore(Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
@@ -20,6 +22,10 @@ public class StoreController {
         }
 
         return "redirect:/logout";
+    }
+
+    public Database getDb(){
+        return db;
     }
 
 }

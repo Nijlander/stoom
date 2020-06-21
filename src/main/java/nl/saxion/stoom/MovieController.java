@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/store/movies")
-public class MovieController {
+public class MovieController extends Database {
 
-    private Database db = new Database();
-    private ArrayList<Movie> movies = db.getMovies();
-    private ArrayList<Movie> owned = db.getOwnedMovies();
+    private ArrayList<Movie> movies = getMovies();
+    private ArrayList<Movie> owned = getOwnedMovies();
 
     /**
      * returns all movies when the user travels to /store/movies/all
@@ -136,7 +135,7 @@ public class MovieController {
                 }
             }
 
-            db.buyMovie(m);
+            buyMovie(m);
 
             model.addAttribute("productType", "movies");
             model.addAttribute("login", false);
@@ -174,7 +173,7 @@ public class MovieController {
         if (session.getAttribute("username") != null) {
             movie.setId(movies.get(movies.size() - 1).getId() + 1);
 
-            db.addMovie(movie);
+            addMovie(movie);
 
             model.addAttribute("productType", "movies");
             model.addAttribute("login", false);
@@ -187,7 +186,7 @@ public class MovieController {
 
     @GetMapping("/owned")
     @ResponseBody
-    public String getOwnedMovies() {
+    public String getgeOwnedMovies() {
         return owned.toString();
     }
 }

@@ -11,11 +11,10 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("")
-public class LoginController {
+public class LoginController extends Database {
 
-    private Database db = new Database();
 
-    private ArrayList<Account> accounts = db.getAccounts();
+    private ArrayList<Account> accounts = getAccounts();
 
     @GetMapping("")
     public String getLogin() {

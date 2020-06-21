@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/store/music")
-public class MusicController {
+public class MusicController extends Database {
 
-    private Database db = new Database();
-    private ArrayList<Music> music = db.getMusic();
-    private ArrayList<Music> owned = db.getOwnedMusic();
+    private ArrayList<Music> music = getMusic();
+    private ArrayList<Music> owned = getOwnedMusic();
 
     /**
      * returns all music when the user travels to /store/music/all
@@ -136,7 +135,7 @@ public class MusicController {
                 }
             }
 
-            db.buyMusic(m);
+            buyMusic(m);
 
             model.addAttribute("productType", "music");
             model.addAttribute("login", false);
@@ -174,7 +173,7 @@ public class MusicController {
         if (session.getAttribute("username") != null) {
             song.setId(music.get(music.size() - 1).getId() + 1);
 
-            db.addMusic(song);
+            addMusic(song);
 
             model.addAttribute("productType", "music");
             model.addAttribute("login", false);
@@ -187,7 +186,7 @@ public class MusicController {
 
     @GetMapping("/owned")
     @ResponseBody
-    public String getOwnedMusic() {
+    public String getGeOwnedMusic() {
         return owned.toString();
     }
 

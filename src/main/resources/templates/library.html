@@ -46,7 +46,7 @@
             </li>
         </ul>
         <ul class="product-list" th:if="${type.equalsIgnoreCase('games')}">
-            <li th:each="product : ${list}" class="product-item">
+            <li th:each="product : ${gameList}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
@@ -57,18 +57,18 @@
             </li>
         </ul>
         <ul class="product-list" th:if="${type.equalsIgnoreCase('movies')}">
-            <li th:each="product : ${list}" class="product-item">
+            <li th:each="product : ${movieList}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
-                    <h1 th:text="${product.getName()}">}</h1>
+                    <h1 th:text="${product.getTitle()}">}</h1>
                     <p class="product-category" th:text="${product.getGenre()}"></p>
                     <p class="product-description" th:text="${product.getDescription()}"></p>
                 </div>
             </li>
         </ul>
         <ul class="product-list" th:if="${type.equalsIgnoreCase('music')}">
-            <li th:each="product : ${list}" class="product-item">
+            <li th:each="product : ${musicList}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
