@@ -11,7 +11,6 @@ import java.util.ArrayList;
 @RequestMapping("/store/movies")
 public class MovieController extends Database {
 
-    private ArrayList<Movie> movies = getMovies();
     private ArrayList<Movie> owned = getOwnedMovies();
 
     /**
@@ -24,7 +23,7 @@ public class MovieController extends Database {
         if (session.getAttribute("username") != null) {
             model.addAttribute("filter", "All Movies");
             model.addAttribute("filterUrl", "all");
-            model.addAttribute("allMovies", movies);
+            model.addAttribute("allMovies", getMovies());
 
             return "movies";
         }
@@ -43,7 +42,7 @@ public class MovieController extends Database {
         if (session.getAttribute("username") != null) {
             ArrayList<Movie> list = new ArrayList<>();
 
-            for (Movie movie : movies) {
+            for (Movie movie : getMovies()) {
                 if (movie.getGenre().equalsIgnoreCase(genre)) {
                     list.add(movie);
                 }
@@ -72,7 +71,7 @@ public class MovieController extends Database {
             ArrayList<Movie> list = new ArrayList<>();
             Movie m = null;
 
-            for (Movie movie : movies) {
+            for (Movie movie : getMovies()) {
                 if (movie.getGenre().equalsIgnoreCase(genre)) {
                     list.add(movie);
                 }
@@ -104,7 +103,7 @@ public class MovieController extends Database {
         if (session.getAttribute("username") != null) {
             Movie m = null;
 
-            for (Movie movie : movies) {
+            for (Movie movie : getMovies()) {
                 if (movie.getId() == id) {
                     m = movie;
                 }
@@ -129,7 +128,7 @@ public class MovieController extends Database {
         if (session.getAttribute("username") != null) {
             Movie m = null;
 
-            for (Movie movie : movies) {
+            for (Movie movie : getMovies()) {
                 if (movie.getId() == id) {
                     m = movie;
                 }
@@ -171,7 +170,7 @@ public class MovieController extends Database {
     @PostMapping("/add")
     public String addMovie(Movie movie, Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
-            movie.setId(movies.get(movies.size() - 1).getId() + 1);
+            movie.setId(getMovies().get(getMovies().size() - 1).getId() + 1);
 
             addMovie(movie);
 

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class GameController extends Database {
 
 
-    private ArrayList<Game> games = getGames();
     private ArrayList<Game> owned = getOwnedGames();
 
 
@@ -27,7 +26,7 @@ public class GameController extends Database {
         if (session.getAttribute("username") != null) {
             model.addAttribute("filter", "All Games");
             model.addAttribute("filterUrl", "all");
-            model.addAttribute("allGames", games);
+            model.addAttribute("allGames", getGames());
 
             return "games";
         }
@@ -46,7 +45,7 @@ public class GameController extends Database {
         if (session.getAttribute("username") != null) {
             ArrayList<Game> list = new ArrayList<>();
 
-            for (Game game : games) {
+            for (Game game : getGames()) {
                 if (game.getCategory().equalsIgnoreCase(category)) {
                     list.add(game);
                 }
@@ -75,7 +74,7 @@ public class GameController extends Database {
             ArrayList<Game> list = new ArrayList<>();
             Game g = null;
 
-            for (Game game : games) {
+            for (Game game : getGames()) {
                 if (game.getCategory().equalsIgnoreCase(category)) {
                     list.add(game);
                 }
@@ -107,7 +106,7 @@ public class GameController extends Database {
         if (session.getAttribute("username") != null) {
             Game g = null;
 
-            for (Game game : games) {
+            for (Game game : getGames()) {
                 if (game.getId() == id) {
                     g = game;
                 }
@@ -132,7 +131,7 @@ public class GameController extends Database {
         if (session.getAttribute("username") != null) {
             Game g = null;
 
-            for (Game game : games) {
+            for (Game game : getGames()) {
                 if (game.getId() == id) {
                     g = game;
                 }
@@ -174,7 +173,7 @@ public class GameController extends Database {
     @PostMapping("/add")
     public String addGame(Game game, Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
-            game.setId(games.get(games.size() - 1).getId() + 1);
+            game.setId(getGames().get(getGames().size() - 1).getId() + 1);
 
             addGame(game);
 

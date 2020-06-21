@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @RequestMapping("/store/music")
 public class MusicController extends Database {
 
-    private ArrayList<Music> music = getMusic();
+
     private ArrayList<Music> owned = getOwnedMusic();
 
     /**
@@ -24,7 +24,7 @@ public class MusicController extends Database {
         if (session.getAttribute("username") != null) {
             model.addAttribute("filter", "All Music");
             model.addAttribute("filterUrl", "all");
-            model.addAttribute("allMusic", music);
+            model.addAttribute("allMusic", getMusic());
 
             return "music";
         }
@@ -43,7 +43,7 @@ public class MusicController extends Database {
         if (session.getAttribute("username") != null) {
             ArrayList<Music> list = new ArrayList<>();
 
-            for (Music music : music) {
+            for (Music music : getMusic()) {
                 if (music.getGenre().equalsIgnoreCase(genre)) {
                     list.add(music);
                 }
@@ -72,7 +72,7 @@ public class MusicController extends Database {
             ArrayList<Music> list = new ArrayList<>();
             Music m = null;
 
-            for (Music music : music) {
+            for (Music music : getMusic()) {
                 if (music.getGenre().equalsIgnoreCase(genre)) {
                     list.add(music);
                 }
@@ -104,7 +104,7 @@ public class MusicController extends Database {
         if (session.getAttribute("username") != null) {
             Music m = null;
 
-            for (Music music : music) {
+            for (Music music : getMusic()) {
                 if (music.getId() == id) {
                     m = music;
                 }
@@ -129,7 +129,7 @@ public class MusicController extends Database {
         if (session.getAttribute("username") != null) {
             Music m = null;
 
-            for (Music music : music) {
+            for (Music music : getMusic()) {
                 if (music.getId() == id) {
                     m = music;
                 }
@@ -171,7 +171,7 @@ public class MusicController extends Database {
     @PostMapping("/add")
     public String addMusic(Music song, Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
-            song.setId(music.get(music.size() - 1).getId() + 1);
+            song.setId(getMusic().get(getMusic().size() - 1).getId() + 1);
 
             addMusic(song);
 
