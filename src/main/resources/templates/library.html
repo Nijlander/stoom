@@ -17,9 +17,14 @@
         <h1 class="brand">Stoom</h1>
         <ul class="nav-items">
             <li class="nav-item">
+                <a href="/logout">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a href="/library/games">Library</a>
+            </li>
+            <li class="nav-item">
                 <a href="/store">Store</a>
             </li>
-
         </ul>
     </div>
 </div>
@@ -31,17 +36,17 @@
                 <a href="/library/all">All</a>
             </li>
             <li class="filter-item">
-                <a href="/library/movie">Movies</a>
+                <a href="/library/movies">Movies</a>
             </li>
             <li class="filter-item">
                 <a href="/library/music">Songs</a>
             </li>
             <li class="filter-item">
-                <a href="/library/game">Games</a>
+                <a href="/library/games">Games</a>
             </li>
         </ul>
-        <ul class="product-list" th:if="${typeOfProduct == 'game'}">
-            <li th:each="product : ${attribute}" class="product-item">
+        <ul class="product-list" th:if="${type.equalsIgnoreCase('games')}">
+            <li th:each="product : ${list}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
@@ -51,8 +56,8 @@
                 </div>
             </li>
         </ul>
-        <ul class="product-list" th:if="${typeOfProduct == 'movie'}">
-            <li th:each="product : ${attribute}" class="product-item">
+        <ul class="product-list" th:if="${type.equalsIgnoreCase('movies')}">
+            <li th:each="product : ${list}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
@@ -62,8 +67,8 @@
                 </div>
             </li>
         </ul>
-        <ul class="product-list" th:if="${typeOfProduct == 'music'}">
-            <li th:each="product : ${attribute}" class="product-item">
+        <ul class="product-list" th:if="${type.equalsIgnoreCase('music')}">
+            <li th:each="product : ${list}" class="product-item">
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">

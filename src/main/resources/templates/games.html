@@ -20,7 +20,7 @@
                 <a href="/logout">Logout</a>
             </li>
             <li class="nav-item">
-                <a href="#">Library</a>
+                <a href="/library/games">Library</a>
             </li>
             <li class="nav-item">
                 <a href="/store">Store</a>
@@ -71,7 +71,7 @@
                 <img src="https://rijschooltoppie.nl/wp-content/uploads/2019/05/placeholder-300x300.jpg"
                      alt="Placeholder">
                 <div class="product-information">
-                    <h1 th:text="${product.getTitle()}">}</h1>
+                    <h1 th:text="${product.getName()}">}</h1>
                     <p class="product-category" th:text="${product.getCategory()}"></p>
                     <p class="product-description" th:text="${product.getDescription()}"></p>
                     <a th:href="@{'/store/games/' + ${filterUrl} + '/game?id=' + ${product.getId()}}">Learn more</a>
