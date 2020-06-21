@@ -1,0 +1,79 @@
+.add-form h1 {
+    display: block;
+    font-family: "Roboto";
+    font-size: 2.5em;
+    font-weight: 500;
+    color: #fff;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+div.form-group {
+    margin: 20px 0 0 0;
+    padding: 0;
+    display: block;
+}
+
+input.form-control {
+    width: 300px;
+    padding: 10px;
+    font-family: "Roboto";
+    font-size: 1em;
+    font-weight: 300;
+    color: #000;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
+    background: #eee;
+    border: 0;
+    display: block;
+    outline: none;
+}
+
+select.form-control {
+    width: 300px;
+    padding: 10px;
+    font-family: "Roboto";
+    font-size: 1em;
+    font-weight: 300;
+    color: #000;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
+    background: #eee;
+    border: 0;
+    display: block;
+    outline: none;
+}
+
+input.form-submit {
+    width: 300px;
+    padding: 10px;
+    font-family: "Roboto";
+    font-size: 1em;
+    font-weight: 500;
+    color: #fff;
+    box-sizing: border-box;
+    margin: 0;
+    background: #4B81BD;
+    border: 0;
+    display: block;
+    outline: none;
+}
+
+input.form-submit:hover {
+    background: #0060B3;
+    cursor: pointer;
+}
+
+h1.game {
+    background: linear-gradient(to bottom left, #DA5844, #DA4496);
+}
+
+h1.movies {
+    background: linear-gradient(to bottom left, #44DA56, #44D8DA);
+}
+
+h1.music {
+    background: linear-gradient(to bottom left, #5F44DA, #B844DA);
+}

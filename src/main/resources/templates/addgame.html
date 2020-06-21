@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stoom - Add Game</title>
+    <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/add.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="top-bar">
+    <div class="nav">
+        <h1 class="brand">Stoom</h1>
+        <ul class="nav-items">
+            <li class="nav-item">
+                <a href="/logout">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Library</a>
+            </li>
+            <li class="nav-item">
+                <a href="/store">Store</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+<div class="container">
+    <form action="/store/games/add" class="add-form" method="post">
+        <h1 class="game">Add new game</h1>
+        <div class="form-group">
+            <input type="hidden" name="id" placeholder="id" value="0">
+            <input class="form-control" type="text" name="name" placeholder="name">
+            <select class="form-control" name="category" id="category">
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Casual">Casual</option>
+                <option value="Indie">Indie</option>
+                <option value="Racing">Racing</option>
+                <option value="Roleplaying">Roleplaying</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Sports">Sports</option>
+                <option value="Strategy">Strategy</option>
+            </select>
+            <input class="form-control" type="text" name="description" placeholder="description">
+            <input class="form-submit" type="submit" name="submit" value="Save">
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -57,6 +57,15 @@ public class Music {
         return artist;
     }
 
+    /**
+     * zet het id van het liedje
+     *
+     * @param id id van het liedje
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Music{" +

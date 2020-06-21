@@ -35,6 +35,17 @@ li.filter-item a {
     box-sizing: border-box;
 }
 
+li.filter-item:first-of-type a {
+    background: #0275d8;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+li.filter-item:first-of-type a:hover {
+    background: #0060B3;
+}
+
 li.filter-item a:hover {
     background-color: #cccccc;
 }

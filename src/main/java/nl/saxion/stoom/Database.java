@@ -216,4 +216,31 @@ public class Database {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
+
+    /**
+     * saves a game to the store list
+     *
+     * @param g game that needs to be saved
+     */
+    public void addGame(Game g) {
+        games.add(g);
+    }
+
+    /**
+     * saves a song to the store list
+     *
+     * @param m song that needs to be saved
+     */
+    public void addMusic(Music m) {
+        music.add(m);
+    }
+
+    /**
+     * saves a movie to the store list
+     *
+     * @param m movie that needs to be saved
+     */
+    public void addMovie(Movie m) {
+        movies.add(m);
+    }
 }

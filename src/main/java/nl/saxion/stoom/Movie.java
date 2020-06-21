@@ -57,6 +57,15 @@ public class Movie {
         return description;
     }
 
+    /**
+     * zet het id van de film
+     *
+     * @param id id van de film
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +

@@ -57,6 +57,15 @@ public class Game {
         return category;
     }
 
+    /**
+     * zet de id van het product
+     *
+     * @param id id van het desbetreffende product
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Game{" +

@@ -147,6 +147,44 @@ public class GameController {
         return "redirect:/logout";
     }
 
+    /**
+     * returns the add game page
+     *
+     * @return page that needs to be shown
+     */
+    @GetMapping("/add")
+    public String getAddPage(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return "addgame";
+        }
+
+        return "redirect:/logout";
+    }
+
+    /**
+     * adds the entered information into a game and saves it to the database
+     *
+     * @param game    game that needs to be saved
+     * @param model   model needed for routing purposes
+     * @param session session needed for authentication
+     * @return
+     */
+    @PostMapping("/add")
+    public String addGame(Game game, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            game.setId(games.get(games.size() - 1).getId() + 1);
+
+            db.addGame(game);
+
+            model.addAttribute("productType", "games");
+            model.addAttribute("login", false);
+
+            return "reroute";
+        }
+
+        return "redirect:/logout";
+    }
+
     @GetMapping("/owned")
     @ResponseBody
     public String getOwnedGames() {

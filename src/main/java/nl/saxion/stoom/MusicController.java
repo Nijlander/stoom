@@ -147,6 +147,44 @@ public class MusicController {
         return "redirect:/logout";
     }
 
+    /**
+     * returns the add music page
+     *
+     * @return page that needs to be shown
+     */
+    @GetMapping("/add")
+    public String getAddPage(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return "addmusic";
+        }
+
+        return "redirect:/logout";
+    }
+
+    /**
+     * adds the entered information into a song and saves it to the database
+     *
+     * @param song    song that needs to be saved
+     * @param model   model needed for routing purposes
+     * @param session session needed for authentication
+     * @return
+     */
+    @PostMapping("/add")
+    public String addMusic(Music song, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            song.setId(music.get(music.size() - 1).getId() + 1);
+
+            db.addMusic(song);
+
+            model.addAttribute("productType", "music");
+            model.addAttribute("login", false);
+
+            return "reroute";
+        }
+
+        return "redirect:/logout";
+    }
+
     @GetMapping("/owned")
     @ResponseBody
     public String getOwnedMusic() {

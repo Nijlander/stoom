@@ -147,6 +147,44 @@ public class MovieController {
         return "redirect:/logout";
     }
 
+    /**
+     * returns the add movie page
+     *
+     * @return page that needs to be shown
+     */
+    @GetMapping("/add")
+    public String getAddPage(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return "addmovie";
+        }
+
+        return "redirect:/logout";
+    }
+
+    /**
+     * adds the entered information into a movie and saves it to the database
+     *
+     * @param movie   movie that needs to be saved
+     * @param model   model needed for routing purposes
+     * @param session session needed for authentication
+     * @return
+     */
+    @PostMapping("/add")
+    public String addMovie(Movie movie, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            movie.setId(movies.get(movies.size() - 1).getId() + 1);
+
+            db.addMovie(movie);
+
+            model.addAttribute("productType", "movies");
+            model.addAttribute("login", false);
+
+            return "reroute";
+        }
+
+        return "redirect:/logout";
+    }
+
     @GetMapping("/owned")
     @ResponseBody
     public String getOwnedMovies() {
