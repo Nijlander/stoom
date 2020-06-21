@@ -17,7 +17,7 @@ public class LibraryController {
     private ArrayList<Music> ownedMusic = db.getOwnedMusic();
 
     /**
-     * returns all games when the user travels to /store/games/all
+     * returns all owned when the user travels to /store/games/all
      *
      * @return list of games
      */
@@ -39,20 +39,25 @@ public class LibraryController {
      * @return list of games
      */
     @GetMapping("/{category}")
-    public String getGamesByCategory(@PathVariable String category, Model model) {
-        ArrayList<Game> list = new ArrayList<>();
-
-        for (Game game : games) {
-            if (game.getCategory().equalsIgnoreCase(category)) {
-                list.add(game);
-            }
+    public String getOwnedByCategory(@PathVariable String category, Model model) {
+        ArrayList<Game> gameList = new ArrayList<>();
+        ArrayList<Movie> movieList = new ArrayList<>();
+        ArrayList<Music> musicList = new ArrayList<>();
+        if (category == "game") {
+            model.addAttribute("attribute", db.getOwnedGames());
+            model.addAttribute("typeOfProduct", "game");
+        } else if (category == "movie") {
+            model.addAttribute("attribute", db.getOwnedMovies());
+            model.addAttribute("typeOfProduct", "movies");
+        } else if (category == "music") {
+            model.addAttribute("attribute", db.getOwnedMusic());
+            model.addAttribute("typeOfProduct", "music");
         }
 
-        model.addAttribute("filter", category.substring(0, 1).toUpperCase() + category.substring(1) + " Games");
+        model.addAttribute("filter", "Owned " + category.substring(0, 1).toUpperCase() + category.substring(1));
         model.addAttribute("filterUrl", category.toLowerCase());
-        model.addAttribute("allGames", list);
 
-        return "games";
+        return "library";
     }
 
     /**
@@ -82,7 +87,7 @@ public class LibraryController {
         model.addAttribute("game", g);
         model.addAttribute("lastPage", category.toLowerCase());
 
-        return "game";
+        return "library";
     }
 
     /**
@@ -104,7 +109,7 @@ public class LibraryController {
         model.addAttribute("game", g);
         model.addAttribute("lastPage", "all");
 
-        return "game";
+        return "library";
     }
 
     /**
@@ -126,7 +131,7 @@ public class LibraryController {
 
         model.addAttribute("productType", "games");
 
-        return "redirect";
+        return "reroute";
     }
 
     @GetMapping("/owned")
