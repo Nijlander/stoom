@@ -21,15 +21,15 @@ public class LibraryController {
      *
      * @return list of games
      */
-        @GetMapping("/all")
-        public String getGames(Model model) {
-            model.addAttribute("filter", "All Owned");
-            model.addAttribute("filterUrl", "all");
-            model.addAttribute("allGames", ownedGame);
-            model.addAttribute("allMovies", ownedMovie);
-            model.addAttribute("allSongs", ownedMusic);
+    @GetMapping("/all")
+    public String getGames(Model model) {
+        model.addAttribute("filter", "All Owned");
+        model.addAttribute("filterUrl", "all");
+        model.addAttribute("allGames", ownedGame);
+        model.addAttribute("allMovies", ownedMovie);
+        model.addAttribute("allSongs", ownedMusic);
 
-            return "library";
+        return "library";
     }
 
     /**
@@ -132,6 +132,6 @@ public class LibraryController {
     @GetMapping("/owned")
     @ResponseBody
     public String getOwnedGames() {
-        return owned.toString();
+        return ownedGame.toString();
     }
 }
