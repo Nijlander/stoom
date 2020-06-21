@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stoom - Login</title>
+    <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form action="login" method="post" class="login">
+        <h1>Stoom</h1>
+        <input placeholder="Username" type="text" name="username" class="form-control">
+        <input placeholder="Password" type="password" name="password" class="form-control">
+        <input type="submit" name="submit" class="form-submit" value="Login">
+    </form>
+</div>
+</body>
+</html>

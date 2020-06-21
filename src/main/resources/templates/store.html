@@ -8,21 +8,13 @@
     <link th:href="@{/css/store.css}" rel="stylesheet"/>
 </head>
 <body>
-<p>GOODMORNING MOTHERFUCKER, IT WORKS</p>
-<p>MENDING koekeloe</p>
-
-<!--<ul th:each="game : ${allGames}">-->
-<!--    <li>-->
-<!--        <p th:text="${game.id}" class="p"></p>-->
-<!--        <p th:text="${game.name}" class="p"></p>-->
-<!--        <p th:text="${game.category}" class="p"></p>-->
-<!--        <p th:text="${game.description}" class="p"></p>-->
-<!--    </li>-->
-<!--</ul>-->
 <div class="top-bar">
     <div class="nav">
         <h1 class="brand">Stoom</h1>
         <ul class="nav-items">
+            <li class="nav-item">
+                <a href="/logout">Logout</a>
+            </li>
             <li class="nav-item">
                 <a href="#">Library</a>
             </li>
@@ -33,7 +25,7 @@
     </div>
 </div>
 <div class="container">
-    <h1 class="header">Your source of entertainment</h1>
+    <h1 th:text="${loggedUser}" class="header"></h1>
     <div class="store-options-grid">
         <a href="/store/games/all" class="store-option games-option">Games</a>
         <a href="/store/movies/all" class="store-option movies-option">Movies</a>

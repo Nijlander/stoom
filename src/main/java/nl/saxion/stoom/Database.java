@@ -13,6 +13,8 @@ public class Database {
     private ArrayList<Movie> movies;
     private ArrayList<Movie> ownedMovies;
 
+    private ArrayList<Account> accounts;
+
 
     /**
      * constructor
@@ -27,9 +29,14 @@ public class Database {
         movies = new ArrayList<>();
         ownedMovies = new ArrayList<>();
 
+        accounts = new ArrayList<>();
+
         populateGames(50);
         populateMusic(50);
         populateMovies(50);
+
+        accounts.add(new Account("RensNijland", "Test123"));
+        accounts.add(new Account("ThijsVoshaar", "Test123"));
     }
 
     /**
@@ -199,5 +206,14 @@ public class Database {
      */
     public void buyMovie(Movie m) {
         this.ownedMovies.add(m);
+    }
+
+    /**
+     * returns all accounts currently stored in the database
+     *
+     * @return list of accounts
+     */
+    public ArrayList<Account> getAccounts() {
+        return accounts;
     }
 }

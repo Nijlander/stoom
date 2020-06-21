@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -20,12 +21,16 @@ public class MovieController {
      * @return list of movies
      */
     @GetMapping("/all")
-    public String getMovies(Model model) {
-        model.addAttribute("filter", "All Movies");
-        model.addAttribute("filterUrl", "all");
-        model.addAttribute("allMovies", movies);
+    public String getMovies(Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            model.addAttribute("filter", "All Movies");
+            model.addAttribute("filterUrl", "all");
+            model.addAttribute("allMovies", movies);
 
-        return "movies";
+            return "movies";
+        }
+
+        return "redirect:/logout";
     }
 
     /**
@@ -35,20 +40,24 @@ public class MovieController {
      * @return list of movies
      */
     @GetMapping("/{genre}")
-    public String getMoviesByGenre(@PathVariable String genre, Model model) {
-        ArrayList<Movie> list = new ArrayList<>();
+    public String getMoviesByGenre(@PathVariable String genre, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            ArrayList<Movie> list = new ArrayList<>();
 
-        for (Movie movie : movies) {
-            if (movie.getGenre().equalsIgnoreCase(genre)) {
-                list.add(movie);
+            for (Movie movie : movies) {
+                if (movie.getGenre().equalsIgnoreCase(genre)) {
+                    list.add(movie);
+                }
             }
+
+            model.addAttribute("filter", genre.substring(0, 1).toUpperCase() + genre.substring(1) + " Movies");
+            model.addAttribute("filterUrl", genre.toLowerCase());
+            model.addAttribute("allMovies", list);
+
+            return "movies";
         }
 
-        model.addAttribute("filter", genre.substring(0, 1).toUpperCase() + genre.substring(1) + " Movies");
-        model.addAttribute("filterUrl", genre.toLowerCase());
-        model.addAttribute("allMovies", list);
-
-        return "movies";
+        return "redirect:/logout";
     }
 
     /**
@@ -59,26 +68,30 @@ public class MovieController {
      * @return the selected movie
      */
     @GetMapping("/{genre}/movie")
-    public String getMovieByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre, Model model) {
-        ArrayList<Movie> list = new ArrayList<>();
-        Movie m = null;
+    public String getMovieByGenre(@RequestParam("id") int id, @PathVariable("genre") String genre, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            ArrayList<Movie> list = new ArrayList<>();
+            Movie m = null;
 
-        for (Movie movie : movies) {
-            if (movie.getGenre().equalsIgnoreCase(genre)) {
-                list.add(movie);
+            for (Movie movie : movies) {
+                if (movie.getGenre().equalsIgnoreCase(genre)) {
+                    list.add(movie);
+                }
             }
+
+            for (Movie movie : list) {
+                if (movie.getId() == id) {
+                    m = movie;
+                }
+            }
+
+            model.addAttribute("movie", m);
+            model.addAttribute("lastPage", genre.toLowerCase());
+
+            return "movie";
         }
 
-        for (Movie movie : list) {
-            if (movie.getId() == id) {
-                m = movie;
-            }
-        }
-
-        model.addAttribute("movie", m);
-        model.addAttribute("lastPage", genre.toLowerCase());
-
-        return "movie";
+        return "redirect:/logout";
     }
 
     /**
@@ -88,19 +101,23 @@ public class MovieController {
      * @return the specified movie
      */
     @GetMapping("/all/movie")
-    public String getMovieById(@RequestParam("id") int id, Model model) {
-        Movie m = null;
+    public String getMovieById(@RequestParam("id") int id, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            Movie m = null;
 
-        for (Movie movie : movies) {
-            if (movie.getId() == id) {
-                m = movie;
+            for (Movie movie : movies) {
+                if (movie.getId() == id) {
+                    m = movie;
+                }
             }
+
+            model.addAttribute("movie", m);
+            model.addAttribute("lastPage", "all");
+
+            return "movie";
         }
 
-        model.addAttribute("movie", m);
-        model.addAttribute("lastPage", "all");
-
-        return "movie";
+        return "redirect:/logout";
     }
 
     /**
@@ -109,20 +126,25 @@ public class MovieController {
      * @param id id of the movie that needs to be stored
      */
     @GetMapping("/buy")
-    public String buyMovie(@RequestParam("id") int id, Model model) {
-        Movie m = null;
+    public String buyMovie(@RequestParam("id") int id, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            Movie m = null;
 
-        for (Movie movie : movies) {
-            if (movie.getId() == id) {
-                m = movie;
+            for (Movie movie : movies) {
+                if (movie.getId() == id) {
+                    m = movie;
+                }
             }
+
+            db.buyMovie(m);
+
+            model.addAttribute("productType", "movies");
+            model.addAttribute("login", false);
+
+            return "reroute";
         }
 
-        db.buyMovie(m);
-
-        model.addAttribute("productType", "movies");
-
-        return "redirect";
+        return "redirect:/logout";
     }
 
     @GetMapping("/owned")

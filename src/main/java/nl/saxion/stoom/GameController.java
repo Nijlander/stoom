@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -20,12 +21,16 @@ public class GameController {
      * @return list of games
      */
     @GetMapping("/all")
-    public String getGames(Model model) {
-        model.addAttribute("filter", "All Games");
-        model.addAttribute("filterUrl", "all");
-        model.addAttribute("allGames", games);
+    public String getGames(Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            model.addAttribute("filter", "All Games");
+            model.addAttribute("filterUrl", "all");
+            model.addAttribute("allGames", games);
 
-        return "games";
+            return "games";
+        }
+
+        return "redirect:/logout";
     }
 
     /**
@@ -35,20 +40,24 @@ public class GameController {
      * @return list of games
      */
     @GetMapping("/{category}")
-    public String getGamesByCategory(@PathVariable String category, Model model) {
-        ArrayList<Game> list = new ArrayList<>();
+    public String getGamesByCategory(@PathVariable String category, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            ArrayList<Game> list = new ArrayList<>();
 
-        for (Game game : games) {
-            if (game.getCategory().equalsIgnoreCase(category)) {
-                list.add(game);
+            for (Game game : games) {
+                if (game.getCategory().equalsIgnoreCase(category)) {
+                    list.add(game);
+                }
             }
+
+            model.addAttribute("filter", category.substring(0, 1).toUpperCase() + category.substring(1) + " Games");
+            model.addAttribute("filterUrl", category.toLowerCase());
+            model.addAttribute("allGames", list);
+
+            return "games";
         }
 
-        model.addAttribute("filter", category.substring(0, 1).toUpperCase() + category.substring(1) + " Games");
-        model.addAttribute("filterUrl", category.toLowerCase());
-        model.addAttribute("allGames", list);
-
-        return "games";
+        return "redirect:/logout";
     }
 
     /**
@@ -59,26 +68,30 @@ public class GameController {
      * @return the selected game
      */
     @GetMapping("/{category}/game")
-    public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category, Model model) {
-        ArrayList<Game> list = new ArrayList<>();
-        Game g = null;
+    public String getGameByCategory(@RequestParam("id") int id, @PathVariable("category") String category, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            ArrayList<Game> list = new ArrayList<>();
+            Game g = null;
 
-        for (Game game : games) {
-            if (game.getCategory().equalsIgnoreCase(category)) {
-                list.add(game);
+            for (Game game : games) {
+                if (game.getCategory().equalsIgnoreCase(category)) {
+                    list.add(game);
+                }
             }
+
+            for (Game game : list) {
+                if (game.getId() == id) {
+                    g = game;
+                }
+            }
+
+            model.addAttribute("game", g);
+            model.addAttribute("lastPage", category.toLowerCase());
+
+            return "game";
         }
 
-        for (Game game : list) {
-            if (game.getId() == id) {
-                g = game;
-            }
-        }
-
-        model.addAttribute("game", g);
-        model.addAttribute("lastPage", category.toLowerCase());
-
-        return "game";
+        return "redirect:/logout";
     }
 
     /**
@@ -88,19 +101,23 @@ public class GameController {
      * @return the specified game
      */
     @GetMapping("/all/game")
-    public String getGameById(@RequestParam("id") int id, Model model) {
-        Game g = null;
+    public String getGameById(@RequestParam("id") int id, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            Game g = null;
 
-        for (Game game : games) {
-            if (game.getId() == id) {
-                g = game;
+            for (Game game : games) {
+                if (game.getId() == id) {
+                    g = game;
+                }
             }
+
+            model.addAttribute("game", g);
+            model.addAttribute("lastPage", "all");
+
+            return "game";
         }
 
-        model.addAttribute("game", g);
-        model.addAttribute("lastPage", "all");
-
-        return "game";
+        return "redirect:/logout";
     }
 
     /**
@@ -109,20 +126,25 @@ public class GameController {
      * @param id id of the game that needs to be stored
      */
     @GetMapping("/buy")
-    public String buyGame(@RequestParam("id") int id, Model model) {
-        Game g = null;
+    public String buyGame(@RequestParam("id") int id, Model model, HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            Game g = null;
 
-        for (Game game : games) {
-            if (game.getId() == id) {
-                g = game;
+            for (Game game : games) {
+                if (game.getId() == id) {
+                    g = game;
+                }
             }
+
+            db.buyGame(g);
+
+            model.addAttribute("productType", "games");
+            model.addAttribute("login", false);
+
+            return "reroute";
         }
 
-        db.buyGame(g);
-
-        model.addAttribute("productType", "games");
-
-        return "redirect";
+        return "redirect:/logout";
     }
 
     @GetMapping("/owned")
